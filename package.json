@@ -1,0 +1,20 @@
+{
+    "private": true,
+    "name": "addressfinder-module-magento1",
+    "description": "Address Autocomplete for your Magento 1 store by AddressFinder",
+    "scripts": {
+        "dev": "node_modules/webpack/bin/webpack.js --mode=development --progress --hide-modules --config=webpack.config.js",
+        "watch": "npm run dev -- --watch",
+        "production": "node_modules/webpack/bin/webpack.js --mode=production --no-progress --hide-modules --config=webpack.config.js"
+    },
+    "license": "OSL-3.0",
+    "devDependencies": {
+        "@babel/core": "^7.1.2",
+        "@babel/preset-env": "^7.1.0",
+        "babel-loader": "^8.0.4",
+        "lodash": "^4.17.11",
+        "webpack": "^4.20.2",
+        "webpack-cli": "^3.1.2"
+    },
+    "dependencies": {}
+}

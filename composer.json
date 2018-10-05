@@ -1,0 +1,21 @@
+{
+    "name": "addressfinder/module-magento1",
+    "description": "Address Autocomplete for your Magento 1 store by AddressFinder",
+    "require": {
+        "php": "~5.5.22|~5.6.0|~7.0.0|~7.1.0|~7.2.0"
+    },
+    "type": "magento-module",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "extra": {
+        "map": [
+            ["app/code/community/AddressFinder/AddressFinder", "app/code/community/AddressFinder/AddressFinder"],
+            ["app/design/frontend/base/default/layout/addressfinder.xml", "app/design/frontend/base/default/layout/addressfinder.xml"],
+            ["app/design/frontend/base/default/template/addressfinder", "app/design/frontend/base/default/template/addressfinder"],
+            ["app/etc/modules/AddressFinder_AddressFinder.xml", "app/etc/modules/AddressFinder_AddressFinder.xml"],
+            ["js/addressfinder", "js/addressfinder"]
+        ]
+    }
+}

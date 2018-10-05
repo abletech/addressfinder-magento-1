@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <customer_address_form>
+        <update handle="add_addressfinder_js"/>
+
+        <reference name="my.account.wrapper">
+            <block type="addressfinder/customer_address_form" name="addressfinder_customer_address_form"/>
+        </reference>
+
+    </customer_address_form>
+
+    <add_addressfinder_js>
+        <reference name="head">
+
+            <action method="addJs">
+                <name>addressfinder/dist/addressfinder.js</name>
+                <params>defer</params>
+            </action>
+
+        </reference>
+    </add_addressfinder_js>
+
+</layout>

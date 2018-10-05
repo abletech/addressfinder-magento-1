@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+
+                                    <!--
+                                        Add an ACL resource for the AddressFinder configuration
+                                        with a sort order to sit near it's neighbour, OAuth.
+                                    -->
+                                    <addressfinder translate="title" module="addressfinder">
+                                        <title>AddressFinder Section</title>
+                                        <sort_order>20</sort_order>
+                                    </addressfinder>
+
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

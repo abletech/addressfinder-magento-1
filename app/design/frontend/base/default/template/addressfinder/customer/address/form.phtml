@@ -1,0 +1,26 @@
+<?php
+
+/** @var AddressFinder_AddressFinder_Block_Customer_Address_Form $this */
+
+if ($this->isEnabled()): ?>
+    <script>
+        document.observe('addressfinder:magento:loaded', function (event) {
+            window.addressFinderMagento = new event.memo.Magento('#country', '#street_1', {
+                licenceKey: '<?=$this->getLicenceKey()?>',
+                <?php if ($this->isDebugMode()): ?>
+                    debugMode: true,
+                <?php endif ?>
+                <?php if ($this->hasWidgetOptions()): ?>
+                    widgetOptions: <?=$this->getWidgetOptions()?>,
+                <?php endif ?>
+                mappings: {
+                    street1: '#street_1',
+                    street2: '#street_2',
+                    city: '#city',
+                    region: '#region',
+                    postcode: '#zip',
+                }
+            });
+        });
+    </script>
+<?php endif ?>
