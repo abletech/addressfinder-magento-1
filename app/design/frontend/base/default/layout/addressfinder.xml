@@ -10,6 +10,18 @@
 
     </customer_address_form>
 
+    <checkout_onepage_index>
+        <update handle="add_addressfinder_js"/>
+
+        <reference name="form.additional.info">
+            <block type="core/text_list" name="form.additional.info.extra">
+                <block type="addressfinder/checkout_onepage_billing" name="addressfinder_checkout_onepage_billing"/>
+                <block type="addressfinder/checkout_onepage_shipping" name="addressfinder_checkout_onepage_shipping"/>
+            </block>
+        </reference>
+
+    </checkout_onepage_index>
+
     <add_addressfinder_js>
         <reference name="head">
 

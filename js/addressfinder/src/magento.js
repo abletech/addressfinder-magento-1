@@ -229,6 +229,7 @@ export default class Magento {
         }
 
         parameters[0] = '[AddressFinder Magento] '+parameters[0];
+        parameters.push(this.autocompleteSelector);
 
         console.debug.apply(null, parameters);
     }
