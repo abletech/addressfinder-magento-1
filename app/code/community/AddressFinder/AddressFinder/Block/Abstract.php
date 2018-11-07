@@ -66,4 +66,14 @@ abstract class AddressFinder_AddressFinder_Block_Abstract extends Mage_Core_Bloc
         // transformation which may not actually be intented by the user.
         return $json;
     }
+
+    /**
+     * Returns the supported region IDs, by country code.
+     *
+     * @return array
+     */
+    public function getSupportedRegionIds()
+    {
+        return $this->helper('addressfinder')->getSupportedRegionIds();
+    }
 }

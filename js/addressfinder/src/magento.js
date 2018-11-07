@@ -1,4 +1,4 @@
-import { defaults, has, each, size } from 'lodash';
+import { defaults, each, get, has, size } from 'lodash';
 
 import * as au from './providers/au';
 import * as nz from './providers/nz';
@@ -22,6 +22,7 @@ export default class Magento {
         this.debugMode = options.debugMode;
         this.widgetOptions = options.widgetOptions;
         this.initialMappings = options.mappings;
+        this.initialTransformers = options.transformers;
 
         this.initialise();
         this.enable();
@@ -32,6 +33,7 @@ export default class Magento {
         this.autocompleteElement = null;
 
         this.mappings = {};
+        this.transformers = {};
         this.providers = {};
         this.widgets = {};
     }
@@ -50,6 +52,8 @@ export default class Magento {
         this.autocompleteElement = document.querySelector(this.autocompleteSelector);
 
         each(this.initialMappings, (selector, key) => this.registerMapping(key, selector));
+
+        each(this.initialTransformers, (transformer, key) => this.registerTransformer(key, transformer));
 
         this.registerProvider(au);
         this.registerProvider(nz);
@@ -122,6 +126,10 @@ export default class Magento {
         this.enableWidget(country);
     }
 
+    getCountry() {
+        return this.country;
+    }
+
     registerMapping(key, selector) {
         let element = document.querySelector(selector);
 
@@ -142,6 +150,32 @@ export default class Magento {
     getMapping(key) {
         if (this.hasMapping(key)) {
             return this.mappings[key];
+        }
+    }
+
+    registerTransformer(key, transformer) {
+        let element = document.querySelector(transformer.selector);
+
+        if (null === element) {
+            this.debug('Element not found for transformer', transformer.selector, key);
+            return;
+        }
+
+        this.debug('Registering transformer', key, transformer.selector);
+
+        this.transformers[key] = {
+            element: element,
+            values: transformer.values,
+        };
+    }
+
+    hasTransformer(key) {
+        return has(this.transformers, key);
+    }
+
+    getTransformer(key) {
+        if (this.hasTransformer(key)) {
+            return this.transformers[key];
         }
     }
 
@@ -216,6 +250,37 @@ export default class Magento {
         this.fire('addressfinder:magento:value', {
             key: key,
             value: value,
+        });
+
+        if (this.hasTransformer(key)) {
+            this.transformValue(key, value);
+        }
+    }
+
+    transformValue(key, value) {
+        if (!this.hasTransformer(key)) {
+            this.debug('Cannot transform value for mapping because it was never mapped', key, value);
+            return;
+        }
+
+        let transformer = this.getTransformer(key);
+        let path = this.getCountry()+'.'+value;
+
+        if (!has(transformer.values, path)) {
+            this.debug('Cannot transform value for mapping because it does not have a value for the given country', key, this.getCountry(), value);
+            return;
+        }
+
+        this.debug('Transforming value for mapping', key, this.getCountry(), value);
+
+        let transformedValue = get(transformer.values, path);
+        transformer.element.value = transformedValue;
+
+        this.fire('addressfinder:magento:transform', {
+            key: key,
+            value: value,
+            country: this.getCountry(),
+            transformedValue: transformedValue,
         });
     }
 

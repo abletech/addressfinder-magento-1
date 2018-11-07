@@ -23,6 +23,12 @@ if ($this->isEnabled()): ?>
                     city: '#shipping\\:city',
                     region: '#shipping\\:region',
                     postcode: '#shipping\\:postcode',
+                },
+                transformers: {
+                    region: {
+                        selector: '#shipping\\:region_id',
+                        values: <?=Zend_Json::encode($this->getSupportedRegionIds())?>
+                    }
                 }
             });
         });
