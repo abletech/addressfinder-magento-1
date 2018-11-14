@@ -30,7 +30,7 @@
                         <licence_key translate="label">
                             <label>Licence Key</label>
                             <frontend_type>text</frontend_type>
-                            <comment><![CDATA[Get started with a FREE licence key for <a href='https://portal.addressfinder.io/signup/au?utm_source=magento&utm_medium=extension&utm_campaign=magento_admin&utm_term=Australia'>Australia</a> or <a href='https://portal.addressfinder.io/signup/nz?utm_source=magento&utm_medium=extension&utm_campaign=magento_admin&utm_term=New%20Zealand'>New Zealand</a>.]]></comment>
+                            <comment><![CDATA[Get started with a FREE licence key for <a href='https://portal.addressfinder.net/signup/au?utm_source=magento&utm_medium=extension&utm_campaign=magento_admin&utm_term=Australia'>Australia</a> or <a href='https://portal.addressfinder.net/signup/nz?utm_source=magento&utm_medium=extension&utm_campaign=magento_admin&utm_term=New%20Zealand'>New Zealand</a>.]]></comment>
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
