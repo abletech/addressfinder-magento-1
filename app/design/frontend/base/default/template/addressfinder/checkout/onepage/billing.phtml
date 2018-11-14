@@ -1,0 +1,32 @@
+<?php
+
+/** @var AddressFinder_AddressFinder_Block_Checkout_Onepage_Billing $this */
+
+if ($this->isEnabled()): ?>
+    <script>
+        document.observe('addressfinder:magento:loaded', function (event) {
+            window.addressFinderMagentoBilling = new event.memo.Magento('#billing\\:country_id', '#billing\\:street1', {
+                licenceKey: '<?=$this->getLicenceKey()?>',
+                <?php if ($this->isDebugMode()): ?>
+                    debugMode: true,
+                <?php endif ?>
+                <?php if ($this->hasWidgetOptions()): ?>
+                    widgetOptions: <?=$this->getWidgetOptions()?>,
+                <?php endif ?>
+                mappings: {
+                    street1: '#billing\\:street1',
+                    street2: '#billing\\:street2',
+                    city: '#billing\\:city',
+                    region: '#billing\\:region',
+                    postcode: '#billing\\:postcode',
+                },
+                transformers: {
+                    region: {
+                        selector: '#billing\\:region_id',
+                        values: <?=Zend_Json::encode($this->getSupportedRegionIds())?>
+                    }
+                }
+            });
+        });
+    </script>
+<?php endif ?>

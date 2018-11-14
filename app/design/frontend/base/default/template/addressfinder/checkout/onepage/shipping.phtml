@@ -1,0 +1,36 @@
+<?php
+
+/** @var AddressFinder_AddressFinder_Block_Checkout_Onepage_shipping $this */
+
+if ($this->isEnabled()): ?>
+    <script>
+        document.observe('addressfinder:magento:loaded', function (event) {
+            if (!document.querySelector('#shipping-new-address-form')) {
+                return;
+            }
+
+            window.addressFinderMagentoShipping = new event.memo.Magento('#shipping\\:country_id', '#shipping\\:street1', {
+                licenceKey: '<?=$this->getLicenceKey()?>',
+                <?php if ($this->isDebugMode()): ?>
+                    debugMode: true,
+                <?php endif ?>
+                <?php if ($this->hasWidgetOptions()): ?>
+                    widgetOptions: <?=$this->getWidgetOptions()?>,
+                <?php endif ?>
+                mappings: {
+                    street1: '#shipping\\:street1',
+                    street2: '#shipping\\:street2',
+                    city: '#shipping\\:city',
+                    region: '#shipping\\:region',
+                    postcode: '#shipping\\:postcode',
+                },
+                transformers: {
+                    region: {
+                        selector: '#shipping\\:region_id',
+                        values: <?=Zend_Json::encode($this->getSupportedRegionIds())?>
+                    }
+                }
+            });
+        });
+    </script>
+<?php endif ?>

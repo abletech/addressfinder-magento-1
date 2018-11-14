@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <customer_address_form>
+        <update handle="add_addressfinder_js"/>
+
+        <reference name="my.account.wrapper">
+            <block type="addressfinder/customer_address_form" name="addressfinder_customer_address_form"/>
+        </reference>
+
+    </customer_address_form>
+
+    <checkout_onepage_index>
+        <update handle="add_addressfinder_js"/>
+
+        <reference name="form.additional.info">
+            <block type="core/text_list" name="form.additional.info.extra">
+                <block type="addressfinder/checkout_onepage_billing" name="addressfinder_checkout_onepage_billing"/>
+                <block type="addressfinder/checkout_onepage_shipping" name="addressfinder_checkout_onepage_shipping"/>
+            </block>
+        </reference>
+
+    </checkout_onepage_index>
+
+    <add_addressfinder_js>
+        <reference name="head">
+
+            <action method="addJs">
+                <name>addressfinder/dist/addressfinder.js</name>
+                <params>defer</params>
+            </action>
+
+        </reference>
+    </add_addressfinder_js>
+
+</layout>
