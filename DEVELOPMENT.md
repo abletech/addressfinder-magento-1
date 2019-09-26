@@ -4,6 +4,13 @@ To get a Magento 1 store running locally:
 
 1. Create a folder with a docker-compose.yml file and an env file, and copy the contents of the docker-compose-example file and example.env.
 `mkdir docker-magento-1 && cp addressfinder-magento-1/docker-compose-example.yml docker-magento-1/docker-compose.yml && cp addressfinder-magento-1/example.env docker-magento-1/env`
+If you are testing on a version other than Magento 1.8.1, you will need to update the docker file to point at the image you want. You can find the possible images [here](https://hub.docker.com/r/alexcheng/magento/tags) 
+
+For example:
+`  
+  web:
+    image: alexcheng/magento:1.7.0.2
+`
 
 2. navigate to docker-magento-1 folder and start docker
 `docker-compose up`
@@ -32,34 +39,35 @@ To get a Magento 1 store running locally:
 7. Next, click on System > Cache Management, and refresh the necessary caches. If you run into a 'try again later error' while doing this, you may need to delete the files in the var/locks folder.
 8. When you search for your product in the store, you should now be able to find it and checkout
 
+## Installing the AddressFinder Plugin with Composer
+
+1. Inside your docker container, install composer:
+`php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"`
+2. install addressfinder. 
+`php composer.phar require addressfinder/module-magento1`
+3. Install the magento-composer-installer. This creates symlinks between the vendor files created by composer, and your magento install. For this to work, you must tell composer where you have installed Magento.
+`php composer.phar config extra.magento-root-dir "/var/www/html"` (Replace 'var/www/html' with your Magento insallation directory if yours is different)
+`php composer.phar require magento-hackathon/magento-composer-installer:*`
+4. Redeploy `php composer.phar run-script post-install-cmd -vvv -- --redeploy`
+5. In the Magento admin pages, click System > Cache Storage Management and click the 'Flush Magento Cache' button
+6. Click System > Configuration. AddressFinder should be listed in the left menu under 'Services'
+7. Click on AddressFinder in the left menu and set the 'enabled' dropdown to 'Yes'. Add any extra configuration here. If you run into issues with the page displaying a 404 not found, logging out and back in should solve it.
+8. Save the config. AddressFinder should now work correctly in your store. 
+
 ## Installing the AddressFinder Plugin Manually
 
-<!-- TO DO: The plugin can also be installed via composer, but I wasn't able to get this working. These instructions also need to be added.  -->
-
-You will need to copy files from the plugin into your docker container
+You will need to copy files from the plugin into your docker container. These commands assume the plugin and your docker container have the same parent directory.
 
 1. `docker cp addressfinder-magento-1/app/code/community/AddressFinder  <container>:/var/www/html/app/code/community/AddressFinder`
 2. `docker cp addressfinder-magento-1/app/design/frontend/base/default/layout/addressfinder.xml  <container>:/var/www/html/app/design/frontend/base/default/layout/addressfinder.xml`
 3. `docker cp addressfinder-magento-1/app/design/frontend/base/default/template/addressfinder  <container>:/var/www/html/app/design/frontend/base/default/template/addressfinder`
 4. `docker cp addressfinder-magento-1/app/etc/modules/AddressFinder_AddressFinder.xml  05fe5411ed01:/var/www/html/app/etc/modules/AddressFinder_AddressFinder.xml`
 5. `docker cp /Users/katenorquay/addressfinder/addressfinder-magento-1/js/addressfinder  05fe5411ed01:/var/www/html/js/addressfinder`
-
 6. In the Magento admin pages, click System > Cache Storage Management and click the 'Flush Magento Cache' button
 7. Click System > Configuration. AddressFinder should be listed in the left menu under 'Services'
 8. Click on AddressFinder in the left menu and set the 'enabled' dropdown to 'Yes'. Add any extra configuration here. If you run into issues with the page displaying a 404 not found, logging out and back in should solve it.
 9. Save the config. AddressFinder should now work correctly in your store. 
 
-
-Composer Install
-1. install composer:
-
-`php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"`
-
-2. install addressfinder. `php composer.phar require addressfinder/module-magento1`
-3. Install the magento-composer-installer. This creates symlinks between the vendor files created by composer, and your magento install. For this to work, you must tell composer where you have installed Magento.
-`php composer.phar config extra.magento-root-dir "/var/www/html"` - Replace 'var/www/html' with your Magento insallation directory if yours is differet
-`php composer.phar require magento-hackathon/magento-composer-installer:*`
-4. Redeploy `php composer.phar run-script post-install-cmd -vvv -- --redeploy`
