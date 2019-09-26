@@ -6,11 +6,16 @@ There are two supported ways to install the module, either via [Composer](https:
 
 ### Installation Using Composer
 
-To install the AddresssFinder module for Magento 1, simply run:
+To install the AddresssFinder module for Magento 1, run:
 
 ```
 composer require addressfinder/module-magento1
+composer config extra.magento-root-dir "MAGENTO INSTALLATION DIRECTORY"
+composer require magento-hackathon/magento-composer-installer:*
+composer run-script post-install-cmd -vvv -- --redeploy
 ```
+
+The magento-hackathon/magento-composer-installer creates symlinks between the vendor files created by composer, and your magento install. For this to work, you must tell composer where you have installed Magento.
 
 > **Tip**: Don't forget to [enable symlinks](https://magento.stackexchange.com/a/184185) in your Magento installation to enable Composer installation to work. This isn't specific to AddressFinder, but a common "gotcha". [Read more](https://github.com/magento-hackathon/magento-composer-installer/issues/51).
 
