@@ -2,8 +2,7 @@
 
 To get a Magento 1 store running locally:
 
-1. navigate to docker-magento-1 folder and start docker
-`docker-compose up`
+1. start docker: `docker-compose up`
 
 If you are testing on a version other than Magento 1.8.1, you will need to update the docker file to point at the image you want. You can find the possible images [here](https://hub.docker.com/r/alexcheng/magento/tags) 
 
@@ -16,9 +15,9 @@ For example:
 2. You should be able to visit your Magento store at 'local.magento'. You need to update your host file to redirect localhost to local.magento
    to open the file: `sudo vim /etc/hosts`
    add: `127.0.0.1 local.magento`
-   [Need help with Vim?](https://sites.google.com/a/abletech.co.nz/wiki/technology-tips/beginners-guide-to-vim)
+   [Need help with Vim?](https://github.com/abletech/wiki/blob/8ef2a180153ad25bf3f900db85d91ae28546159c/technology_tips/beginners_guide_to_vi.md)
 
-4. `docker-compose exec web bash`
+4. `docker-compose exec web install-magento`
 
 5. Visit your Magento store:
   * Admin pages: http://local.magento/index.php/admin
