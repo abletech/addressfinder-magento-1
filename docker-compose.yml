@@ -2,14 +2,14 @@ version: '3.0'
 
 services:
   web:
-    image: alexcheng/magento:1.8.1.0
+    image: alexcheng/magento:latest
     volumes:
     - web-data:/var/www/html
-    - app/code/community/AddressFinder:/var/www/html/app/code/community/AddressFinder:ro
-    - app/design/frontend/base/default/layout/addressfinder.xml:/var/www/html/app/design/frontend/base/default/layout/addressfinder.xml:ro
-    - app/design/frontend/base/default/template/addressfinder:/var/www/html/app/design/frontend/base/default/template/addressfinder:ro
-    - app/etc/modules/AddressFinder_AddressFinder.xml:/var/www/html/app/etc/modules/AddressFinder_AddressFinder.xml:ro
-    - js/addressfinder:/var/www/html/js/addressfinder:ro
+    - /Users/katenorquay/addressfinder/addressfinder-magento-1/app/code/community/AddressFinder:/var/www/html/app/code/community/AddressFinder:ro
+    - /Users/katenorquay/addressfinder/addressfinder-magento-1/app/design/frontend/base/default/layout/addressfinder.xml:/var/www/html/app/design/frontend/base/default/layout/addressfinder.xml:ro
+    - /Users/katenorquay/addressfinder/addressfinder-magento-1/app/design/frontend/base/default/template/addressfinder:/var/www/html/app/design/frontend/base/default/template/addressfinder:ro
+    - /Users/katenorquay/addressfinder/addressfinder-magento-1/app/etc/modules/AddressFinder_AddressFinder.xml:/var/www/html/app/etc/modules/AddressFinder_AddressFinder.xml:ro
+    - /Users/katenorquay/addressfinder/addressfinder-magento-1/js/addressfinder:/var/www/html/js/addressfinder:ro
     ports:
       - "80:80"
     links:

@@ -4,7 +4,7 @@ To get a Magento 1 store running locally:
 
 1. start docker: `docker-compose up`
 
-If you are testing on a version other than Magento 1.8.1, you will need to update the docker file to point at the image you want. You can find the possible images [here](https://hub.docker.com/r/alexcheng/magento/tags) 
+If you are testing on a version other than Magento 1.9, you will need to update the docker file to point at the image you want. You can find the possible images [here](https://hub.docker.com/r/alexcheng/magento/tags) 
 
 For example:
 `  
@@ -23,7 +23,7 @@ For example:
   * Admin pages: http://local.magento/index.php/admin
   * Shop pages: http://local.magento/index.php/
 
-  Credentials can be found in the example.env file
+  Credentials can be found in the env file
 
 ## Installing a Product in your store
 
@@ -46,13 +46,14 @@ For example:
 
 ## Installing the AddressFinder Plugin with Composer
 
-The docker-compose file is setup to install the plugin manually. If you need to install via Composer for some reason, comment out the following lines in the docker-compose file:
+The docker-compose file is setup to install the plugin manually, but you will need to update to point at your addressfinder-magento-1 plugin.
+If you need to install via Composer for some reason, comment out the following lines in the docker-compose file:
     ```
-    - app/code/community/AddressFinder:/var/www/html/app/code/community/AddressFinder:ro
-    - app/design/frontend/base/default/layout/addressfinder.xml:/var/www/html/app/design/frontend/base/default/layout/addressfinder.xml:ro
-    - app/design/frontend/base/default/template/addressfinder:/var/www/html/app/design/frontend/base/default/template/addressfinder:ro
-    - app/etc/modules/AddressFinder_AddressFinder.xml:/var/www/html/app/etc/modules/AddressFinder_AddressFinder.xml:ro
-    - js/addressfinder:/var/www/html/js/addressfinder:ro
+    - /Users/katenorquay/addressfinder/addressfinder-magento-1/app/code/community/AddressFinder:/var/www/html/app/code/community/AddressFinder:ro
+    - /Users/katenorquay/addressfinder/addressfinder-magento-1/app/design/frontend/base/default/layout/addressfinder.xml:/var/www/html/app/design/frontend/base/default/layout/addressfinder.xml:ro
+    - /Users/katenorquay/addressfinder/addressfinder-magento-1/app/design/frontend/base/default/template/addressfinder:/var/www/html/app/design/frontend/base/default/template/addressfinder:ro
+    - /Users/katenorquay/addressfinder/addressfinder-magento-1/app/etc/modules/AddressFinder_AddressFinder.xml:/var/www/html/app/etc/modules/AddressFinder_AddressFinder.xml:ro
+    - /Users/katenorquay/addressfinder/addressfinder-magento-1/js/addressfinder:/var/www/html/js/addressfinder:ro
     ```
 
 1. `docker-compose exec web bash`
