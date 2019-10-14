@@ -247,11 +247,6 @@ export default class Magento {
 
         this.debug('Setting value for mapping', key, value);
 
-        if (key === 'suburb' && value !== "") {
-            this.getMapping('street1').value = selected.address_line_1_and_2();
-            this.getMapping('street12').value = selected.suburb();
-        }
-
         this.getMapping(key).value = value;
 
         this.fire('addressfinder:magento:value', {
