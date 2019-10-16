@@ -78,6 +78,10 @@ document.observe('addressfinder:magento:result:select', function (event) {
 });
 ```
 
+## Testing
+
+To test this plugin, you will need to clone the magento test environment, and follow the steps to run up your local Magento store
+
 ## Module Development
 
 ### Installation
