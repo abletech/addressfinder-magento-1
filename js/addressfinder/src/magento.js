@@ -132,6 +132,7 @@ export default class Magento {
     }
 
     registerMapping(key, selector) {
+
         let element = document.querySelector(selector);
 
         if (null === element) {
@@ -246,6 +247,7 @@ export default class Magento {
         }
 
         this.debug('Setting value for mapping', key, value);
+
         this.getMapping(key).value = value;
 
         this.fire('addressfinder:magento:value', {
