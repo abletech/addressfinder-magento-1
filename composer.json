@@ -1,7 +1,7 @@
 {
     "name": "addressfinder/module-magento1",
     "description": "Address Autocomplete for your Magento 1 store by AddressFinder",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "require": {
         "php": "~5.5.22|~5.6.0|~7.0.0|~7.1.0|~7.2.0"
     },
