@@ -23,7 +23,7 @@ export default class Magento {
         this.widgetOptions = options.widgetOptions;
         this.initialMappings = options.mappings;
         this.initialTransformers = options.transformers;
-        this.version = "1.0.1";
+        this.version = "1.0.2";
 
         this.initialise();
         this.enable();
@@ -132,6 +132,7 @@ export default class Magento {
     }
 
     registerMapping(key, selector) {
+
         let element = document.querySelector(selector);
 
         if (null === element) {
@@ -246,6 +247,7 @@ export default class Magento {
         }
 
         this.debug('Setting value for mapping', key, value);
+
         this.getMapping(key).value = value;
 
         this.fire('addressfinder:magento:value', {
