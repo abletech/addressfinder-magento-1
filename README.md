@@ -99,7 +99,7 @@ To begin development, you will need a copy of Magento installed using Composer. 
     "require": {
         "magento-hackathon/magento-composer-installer": "^3.1",
         "aydin-hassan/magento-core-composer-installer": "^1.5",
-        "firegento/magento": "v1.9.3.10",
+        "firegento/magento": "v1.9.3.10"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
