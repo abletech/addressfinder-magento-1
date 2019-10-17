@@ -23,6 +23,7 @@ export default class Magento {
         this.widgetOptions = options.widgetOptions;
         this.initialMappings = options.mappings;
         this.initialTransformers = options.transformers;
+        this.version = "1.0.0"
 
         this.initialise();
         this.enable();

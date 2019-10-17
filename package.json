@@ -1,6 +1,7 @@
 {
     "private": true,
     "name": "addressfinder-module-magento1",
+    "version": "1.0.0",
     "description": "Address Autocomplete for your Magento 1 store by AddressFinder",
     "scripts": {
         "dev": "node_modules/webpack/bin/webpack.js --mode=development --progress --hide-modules --config=webpack.config.js",

@@ -78,6 +78,10 @@ document.observe('addressfinder:magento:result:select', function (event) {
 });
 ```
 
+## Testing
+
+To test this plugin, clone the docker-magento1 repo: https://github.com/abletech/docker-magento1. Follow the steps in this project to create your Magento store and test your changes to the AddressFinder plugin.
+
 ## Module Development
 
 ### Installation
