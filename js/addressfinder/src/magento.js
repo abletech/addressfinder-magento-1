@@ -248,12 +248,15 @@ export default class Magento {
 
         this.debug('Setting value for mapping', key, value);
 
-        this.getMapping(key).value = value;
+        let mapping = this.getMapping(key);
+        mapping.value = value;
 
         this.fire('addressfinder:magento:value', {
             key: key,
             value: value,
         });
+
+        this.triggerChangeEvent(mapping);
 
         if (this.hasTransformer(key)) {
             this.transformValue(key, value);
@@ -306,6 +309,19 @@ export default class Magento {
         this.debug('Firing event', parameters[0]);
 
         document.fire.call(null, parameters);
+    }
+
+    triggerChangeEvent(element) {
+        var event;
+        switch (typeof (Event)) {
+        case 'function':
+            event = new Event('change', {"bubbles":true, "cancelable": false});
+            break;
+        default:
+            event = document.createEvent('Event');
+            event.initEvent('change', true, false);
+        }
+        element.dispatchEvent(event);
     }
 
 };
