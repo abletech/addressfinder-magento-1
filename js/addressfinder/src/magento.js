@@ -248,7 +248,7 @@ export default class Magento {
 
         this.debug('Setting value for mapping', key, value);
 
-        let mapping = this.getMapping(key)
+        let mapping = this.getMapping(key);
         mapping.value = value;
 
         this.fire('addressfinder:magento:value', {
@@ -256,7 +256,7 @@ export default class Magento {
             value: value,
         });
 
-        this.triggerChangeEvent(mapping)
+        this.triggerChangeEvent(mapping);
 
         if (this.hasTransformer(key)) {
             this.transformValue(key, value);
